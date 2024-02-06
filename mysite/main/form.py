@@ -32,8 +32,8 @@ class ProizvodFormAdmin(forms.ModelForm):
 			'naziv_proizvoda': 'Naziv',
 			'cijena_proizvoda': 'Cijena',
 			'opis_proizvoda': 'Opis',
-			'proizvod_kategorija': 'Kategorija',		
-            'proizvod_korisnik' : 'Korisnik'
+			'proizvod_kategorija': 'Kategorija',
+            'proizvod_korisnik'	: 'Korisnik	',
 	
 		}
         widgets = {
@@ -41,7 +41,6 @@ class ProizvodFormAdmin(forms.ModelForm):
 			'naziv_proizvoda': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Naziv'}),
             'cijena_proizvoda': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Cijena'}),
 			'opis_proizvoda': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Opis'}),
-            'proizvod_korisnik': forms.SelectMultiple(attrs={'class':'form-control', 'placeholder':'Korisnik'}),
          
 		}
 class korisnikForm(forms.ModelForm):

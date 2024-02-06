@@ -24,5 +24,4 @@ urlpatterns = [
     path('cart/naruci/', views.submit_order, name = 'sumbite_order' ),
     path('narudzba/', views.NarudzbaPopis.as_view(), name='popis'),
     path('cart/placanje/<int:narudzba_id>/', views.Placanje.as_view(), name='palcanje'),
-
     ]
