@@ -1,0 +1,118 @@
+{% extends "landing.html" %}
+
+{% block content %}
+
+    <form action="{% url 'main:pretrazi_proizvode' %}" method="get" class="search-form">
+        
+        <input type="text" name="q" placeholder="Pretraži proizvode">
+        <button type="submit" >Pretraži</button>
+    </form>
+
+
+    <div class="container">
+<br/>
+        <h2>  Rezultati pretrage za "{{ query }}"</h2>
+       
+        <br/>    
+
+<div class="container d-flex justify-content-center mt-50 mb-50">
+            
+        <div class="row">
+            {% for proizvod in proizvodi %}
+           <div class="col-md-4 mt-2">
+            
+                
+                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-img-actions">
+                                            {%if proizvod.slika_proizvoda%}
+                                            <img src="{{ proizvod.slika_proizvoda.url }}"  class="card-img img-fluid" width="96" height="350" alt="" style="width: 400px;; height: 350px; ">
+    
+                                                 {%endif%}                                          
+                                           
+                                        </div>
+                                    </div>
+    
+                                    <div class="card-body bg-light text-center">
+                                        <div class="mb-2">
+                                            <h6 class="font-weight-semibold mb-2">
+                                                <h3 href="#" class="text-default mb-2" data-abc="true">{{ proizvod.naziv_proizvoda }}</h3>
+                                            </h6>
+    
+                                        </div>
+                                        <p style="color: #777; margin-top: 10px;">{{ proizvod.opis_proizvoda }}</p>
+    
+                                        <h3 class="mb-0 font-weight-semibold">{{ proizvod.cijena_proizvoda }} €</h3>
+    
+    
+    
+                                        <form method="post" action="{% url 'main:landing'  %}" style="margin-top: 10px;">
+                                            {% csrf_token %}
+                                            <br />
+                                            <button type="submit" value="{{proizvod.id}}" id="add-cart" style="font-size: 16px; padding: 10px; background-color: #4CAF50;
+                                                 color: white; border: none; border-radius: 5px; cursor: pointer;">Dodaj u narudžbu</button>
+                                        </form>
+    
+                                        
+                                    </div>
+                                </div>
+    
+    
+                            
+                             
+           </div> 
+
+
+            {% empty %}
+                <p>Nema rezultata za pretragu.</p>
+            {% endfor %}
+    </div>
+</div>
+    <script>
+        // Check if button pressed
+        $(document).on('click', '#add-cart', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/cart/add/' ,
+                data: {
+                    id_proizvoda: $(this).val(),
+                    product_qty: $('#qty-cart option:selected').text(),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+        
+                success: function(json){
+                    console.log(json)
+                    document.getElementById('cart_quantity')
+                        textContent = json.qty
+                    location.reload();
+                },
+        
+                error: function(xhr, errmsg, err){
+        
+                }
+        
+        
+            });
+        
+        
+        
+        })
+        
+        
+        
+        
+        </script>
+
+
+
+
+
+
+
+<br/>
+<br/>
+
+    
+{% endblock %}

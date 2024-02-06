@@ -1,0 +1,75 @@
+{% extends "landing.html" %}
+
+{% block content %}
+{% load static %} 
+<br/>
+
+{% if user.is_authenticated %}
+<div class="row justify-content-center">
+<div class="col-lg-8">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Username</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ user.username }}</p>
+          </div>
+        </div>
+        <hr>
+{% for kor in object_list %}
+
+{%if user.username == kor.user.username%}
+
+
+        <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Name</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ kor.ime_korisnika }}</p>
+            </div>
+          </div>
+          <hr>
+        <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Surname</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ kor.prezime_korisnika }}</p>
+            </div>
+          </div>
+          <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Email</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ kor.email_korisnika }}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Phone</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ kor.mobitel_korisnika }}</p>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-sm-3">
+            <p class="mb-0">Address</p>
+          </div>
+          <div class="col-sm-9">
+            <p class="text-muted mb-0">{{ kor.adresa_korisnika }}</p>
+          </div>
+        </div>
+      </div>
+    </div></div>
+{%endif%}
+{% endfor %}
+{% endif %}
+{% endblock %}

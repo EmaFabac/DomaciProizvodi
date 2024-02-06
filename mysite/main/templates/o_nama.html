@@ -1,0 +1,19 @@
+{% extends "landing.html" %}
+
+{% block content %}
+{% load static %} 
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+<section>
+    <h2>O Nama</h2>
+    <img src="{% static 'images/onama.jpg' %}" alt="O Nama Slika" class="about-us-image">
+
+    <p>Platforma za razmijenu domaćih proizvoda je online tržište koje povezuje proizvođače domaćih proizvoda s kupcima. Naša misija je podržati lokalne zajednice, potičući trgovinu domaćim proizvodima.</p>
+    <p>Na našoj platformi možete pronaći raznovrsne proizvode od lokalnih proizvođač.</p>
+    <p>Uzimamo veliku pažnju u odabiru proizvođača kako bismo osigurali visoku kvalitetu proizvoda koje nudimo. Podržavamo održivost, lokalnu ekonomiju i zajednicu.</p>
+    
+
+</section>
+
+{% endblock %}

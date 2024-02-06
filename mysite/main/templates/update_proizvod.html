@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azuriraj proizvod</title>
+</head>
+<body>
+    <h1>Azuriraj proizvod</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Azuriraj proizvod</button>
+    </form>
+</body>
+</html>
+

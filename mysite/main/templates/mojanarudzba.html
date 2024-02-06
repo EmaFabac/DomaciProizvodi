@@ -1,0 +1,73 @@
+Hello{% extends "landing.html" %}
+
+{% block content %}
+<br/>
+
+
+   
+        <div class="container" >
+          {% for narudzba in object_list %}  
+          <div class="row d-flex justify-content-center align-items-center h-50">
+            <div class="col-lg-8 col-xl-6">
+              <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
+                <div class="card-body p-5">
+      
+                  <h1 class="lead fw-bold mb-5" style="color: #f37a27;">Broj narudzbe: {{ narudzba.id_narudzbe }}</h1>
+                  <a href="{% url 'main:placanje_info' narudzba.id_narudzbe %}" style="color: #f37a27;">Informacije o placanju</a>                    <hr>
+                  
+      
+                  <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                    <div class="row">
+                        {% for proizvod in narudzba.narudzba_proizvod.all %}
+        
+                      <div class="col-md-8 col-lg-9">
+                        <p>{{ proizvod.naziv_proizvoda }}</p>
+                      </div>
+                      <div class="col-md-4 col-lg-3">
+                        <p>{{ proizvod.cijena_proizvoda }} €</p>
+                      </div>
+                      {% endfor %}
+                    </div>
+                    
+                  </div>
+      
+                  <div class="row my-4">
+                    <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
+                      <p class="lead fw-bold mb-0" style="color: #f37a27;">{{ narudzba.ukupna_cijena }} €</p>
+                      
+                    </div>
+                    
+                  </div>
+      
+                  
+      
+                  
+      
+                </div>
+              </div>
+            </div>
+          </div>
+          <br/>
+          <br/>
+
+          {% endfor %}
+        </div>
+     
+
+
+
+
+
+
+<br/>
+<br/>
+
+
+
+
+
+
+
+
+
+{% endblock %}

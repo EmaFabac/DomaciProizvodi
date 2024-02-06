@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj proizvod</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Dodaj Proizvod</h1>
+    </div> 
+
+    <div class="shadow p-5 mb-6 bg-light rounded" style="margin: 0 auto; width: 50%;">
+  <div style="text-align: center;">
+    <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Dodaj proizvod</button>
+    </form>
+  </div>
+    </div>
+</body>
+</html>
+

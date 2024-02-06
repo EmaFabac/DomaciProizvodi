@@ -1,0 +1,27 @@
+{% extends "landing.html" %}
+
+{% block content %}
+<style>
+    form {
+        text-align: center;
+        margin-top: 25px; /* Prilagodite razmak iznad obrasca */
+        margin-bottom: 20px;  
+      }
+
+    input[type="text"] {
+        font-size: 1.5em; /* Prilagodite veličinu prema potrebi */
+        padding: 10px; /* Prilagodite potrebnu udaljenost unutar input polja */
+    }
+
+    button {
+        font-size: 1.5em; /* Prilagodite veličinu prema potrebi */
+        padding: 10px; /* Prilagodite potrebnu udaljenost unutar gumba */
+    }
+</style>
+
+<form action="{% url 'main:pretrazi_proizvode' %}" method="get">
+    <input type="text" name="q" placeholder="Pretraži proizvode">
+    <button type="submit">Pretraži</button>
+</form>
+
+{% endblock %}

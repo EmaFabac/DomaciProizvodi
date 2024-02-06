@@ -1,0 +1,32 @@
+{% extends "landing.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Placanje</title>
+</head>
+<body>
+
+<br/>
+<div class="shadow p-5 mb-6 bg-light rounded" style="margin: 0 auto; width: 50%;">
+  <div style="text-align: center;">
+    <h1>Placanje</h1>
+</div>    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br/>
+        <div style="text-align: center;">
+
+        <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+<br/>
+</body>
+</html>
+
+
+
+
+{% endblock %}
