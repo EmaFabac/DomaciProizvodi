@@ -6,14 +6,13 @@
 
    
         <div class="container" >
-          {% for narudzba in object_list %}  
+          {% for narudzba in narudzba_list %}  
           <div class="row d-flex justify-content-center align-items-center h-50">
             <div class="col-lg-8 col-xl-6">
               <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
                 <div class="card-body p-5">
       
                   <h1 class="lead fw-bold mb-5" style="color: #f37a27;">Broj narudzbe: {{ narudzba.id_narudzbe }}</h1>
-                  <a href="{{ narudzba.id_narudzbe}}" style="color: #f37a27;">Informacije o placanju</a>                    <hr>
                   
       
                   <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">

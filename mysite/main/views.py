@@ -113,17 +113,8 @@ class ProizvodeDelete(DeleteView):
         context['main'] = self.get_object()
         return context
     
-class NarudzbaPopis(ListView):
-    model=Narudzba
-    template_name = 'mojanarudzba.html'    
 
-class InfoPlacanje(ListView):
-    model = Placanje
-    template_name = 'placanje_info.html'
-    def get_queryset(self):
-        self.id_narudzbe = get_object_or_404(Placanje, narudzba=self.kwargs['narudzba'])
-        return Narudzba.objects.filter(id_narudzbe=self.id_narudzbe)
-    
+
 
 
 def add_proiz(request):
@@ -218,3 +209,9 @@ class Placanje(CreateView):
         self.object.save()
         return super().form_valid(form)
     success_url = reverse_lazy('main:landing')
+
+
+class NarudzbaPopis(ListView):
+    model=Narudzba
+    template_name = 'mojanarudzba.html'
+    
