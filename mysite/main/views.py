@@ -19,7 +19,7 @@ class LandingPageView(ListView):
     template_name = 'landing.html'
 
     def get(self, request, *args, **kwargs):
-        kate = Kategorija.objects.all()  # Assuming you want to display all categories
+        kate = Kategorija.objects.all() 
         return render(request, 'landing.html', {'kate': kate})
     
 def detalji_kategorije(request, id_kategorije):
@@ -141,7 +141,6 @@ def add_proiz(request):
                 venue.proizvod_korisnik = request.user.korisnik
                 venue.save()
                 return 	redirect('main:mojiproizvodi')
-                #form.save()
     
     else:
         if request.user.is_superuser:
@@ -177,12 +176,9 @@ def cart_add(request):
 def cart_delete(request):
     cart = Cart(request)
     if request.POST.get('action') == 'post':
-		# Get stuff
         id_proizvoda = int(request.POST.get('id_proizvoda'))
-		# Call delete Function in Cart
         cart.delete(proizvod=id_proizvoda)
         response = JsonResponse({'id_proizvoda':id_proizvoda})
-		#return redirect('cart_summary')
         messages.success(request, ("Proizvod izbrisan iz košarice..."))
         return response
     
@@ -194,16 +190,14 @@ def submit_order(request):
         totals = cart.cart_total()
 
         nnarudzba = Narudzba(ukupna_cijena=totals) 
-        if request.user.is_authenticated:  # Check if the user is logged in
+        if request.user.is_authenticated:  
             nnarudzba.narudzba_korisnik = request.user.korisnik  
 
         nnarudzba.save()
         cart.clear()
         del cart.session['session_key'] 
         cart.session.modified = True
-         # Save the nnarudzba object first
-        nnarudzba.narudzba_proizvod.set(cart_proizvod)  # Set the many-to-many relationship after saving
-        
+        nnarudzba.narudzba_proizvod.set(cart_proizvod)  
         
         messages.success(request, "Vaša je narudžba uspješno spremljena!")
         narudzba_id = nnarudzba.id_narudzbe
@@ -217,11 +211,8 @@ class Placanje(CreateView):
     
 
     def form_valid(self, form):
-        # Get the narudzba_id from the URL
         narudzba_id = self.kwargs['narudzba_id']
-        # Get the Narudzba instance
         narudzba = Narudzba.objects.get(id_narudzbe=narudzba_id)
-        # Assign the Narudzba instance to the Placanje model
         self.object = form.save(commit=False)
         self.object.narudzba = narudzba
         self.object.save()
