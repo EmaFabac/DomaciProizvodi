@@ -45,11 +45,6 @@ def pretrazi_proizvode(request):
     query = request.GET.get('q', '')
     proizvodi = Proizvod.objects.filter(naziv_proizvoda__icontains=query)
     return render(request, 'pretraga.html', {'query': query, 'proizvodi': proizvodi})
-def prikazi_narudzbe_korisnika(request, id_korisnika):
-    korisnik = Korisnik.objects.get(pk=id_korisnika)
-    return render(request, 'narudzba.html', {'korisnik': korisnik})
-
-
 
 def login_user (request):
     if request.method == "POST":
@@ -126,20 +121,15 @@ class ProizvodeDelete(DeleteView):
         return context
     
 
-class InfoPlacanje(DetailView):
+class InfoPlacanje(ListView):
     model = Placanje
     template_name = 'placanje_info.html'
-    context_object_name = 'placanje'
+    def get_queryset(self):
+        self.id_narudzbe = get_object_or_404(Placanje, narudzba=self.kwargs['narudzba'])
+        return Narudzba.objects.filter(id_narudzbe=self.id_narudzbe)
     
-    def get_object(self, queryset=None):
-        # Retrieve the narudzba ID from the URL
-        narudzba_id = self.kwargs.get('id_narudzbe')  # Use get method to provide a default value
-        if narudzba_id is not None:
-            # Use the ID to filter the Placanje model
-            placanje = Placanje.objects.get(narudzba=narudzba_id)
-            return placanje
 
-    
+
 def add_proiz(request):
     submitted = False
     if request.method == 'POST':
