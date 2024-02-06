@@ -18,7 +18,8 @@
                                 <div class="card-body">
                                     <div class="card-img-actions">
                                         {%if proizvod.slika_proizvoda%}
-                                        <img src="{{ proizvod.slika_proizvoda.url }}"  class="card-img img-fluid" width="96" height="350" alt="" style="width: 400px;; height: 350px; ">
+                                        <img src="{{ proizvod.slika_proizvoda.url }}" 
+                                         class="card-img img-fluid" width="96" height="350" alt="" style="width: 400px;; height: 350px; ">
 
                                              {%endif%}                                          
                                        
@@ -41,7 +42,8 @@
                                     <form method="post" action="{% url 'main:landing'  %}" style="margin-top: 10px;">
                                         {% csrf_token %}
                                         <br />
-                                        <button type="submit" value="{{proizvod.id}}" id="add-cart" style="font-size: 16px; padding: 10px; background-color: #4CAF50;
+                                        <button type="submit" value="{{proizvod.id}}" 
+                                        id="add-cart" style="font-size: 16px; padding: 10px; background-color: #4CAF50;
                                              color: white; border: none; border-radius: 5px; cursor: pointer;">Dodaj u narudžbu</button>
                                     </form>
 
@@ -59,26 +61,7 @@
 </div>
 
 
-
-
-
-
-
-
 <br/>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <script>

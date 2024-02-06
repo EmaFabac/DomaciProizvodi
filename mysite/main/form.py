@@ -6,13 +6,12 @@ from django.contrib.auth.models import User
 class ProizvodForm(forms.ModelForm):
     class Meta:
         model = Proizvod
-        fields = ['id_proizvoda', 'naziv_proizvoda', 'cijena_proizvoda', 'opis_proizvoda','slika_proizvoda', 'proizvod_kategorija']
+        fields = ['id_proizvoda', 'naziv_proizvoda', 'cijena_proizvoda', 'opis_proizvoda', 'proizvod_kategorija']
         labels = {
 			'id_proizvoda': 'ID',
 			'naziv_proizvoda': 'Naziv',
 			'cijena_proizvoda': 'Cijena',
 			'opis_proizvoda': 'Opis',
-            'slika_proizvoda': 'Slika',
 			'proizvod_kategorija': 'Kategorija',		
 	
 		}
@@ -21,20 +20,18 @@ class ProizvodForm(forms.ModelForm):
 			'naziv_proizvoda': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Naziv'}),
             'cijena_proizvoda': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Cijena'}),
 			'opis_proizvoda': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Opis'}),
-            'proizvod_kategorija': forms.SelectMultiple(attrs={'class':'form-control', 'placeholder':'Kategorija'}),
-
-               
+         
 		}
+
 class ProizvodFormAdmin(forms.ModelForm):
     class Meta:
         model = Proizvod
-        fields = ['id_proizvoda', 'naziv_proizvoda', 'cijena_proizvoda', 'opis_proizvoda','slika_proizvoda', 'proizvod_kategorija', 'proizvod_korisnik']
+        fields = ['id_proizvoda', 'naziv_proizvoda', 'cijena_proizvoda', 'opis_proizvoda', 'proizvod_kategorija', 'proizvod_korisnik']
         labels = {
 			'id_proizvoda': 'ID',
 			'naziv_proizvoda': 'Naziv',
 			'cijena_proizvoda': 'Cijena',
 			'opis_proizvoda': 'Opis',
-            'slika_proizvoda': 'Slika',
 			'proizvod_kategorija': 'Kategorija',		
             'proizvod_korisnik' : 'Korisnik'
 	

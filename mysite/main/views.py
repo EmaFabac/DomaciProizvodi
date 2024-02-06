@@ -14,7 +14,6 @@ from .cart import Cart
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 
-
 class LandingPageView(ListView):
     model = Kategorija
     template_name = 'landing.html'
@@ -22,7 +21,15 @@ class LandingPageView(ListView):
     def get(self, request, *args, **kwargs):
         kate = Kategorija.objects.all()  # Assuming you want to display all categories
         return render(request, 'landing.html', {'kate': kate})
+    
+def detalji_kategorije(request, id_kategorije):
+    kategorija = get_object_or_404(Kategorija, id_kategorije=id_kategorije)
+    proizvodi = kategorija.proizvodi.all()
 
+    return render(request, 'detalji_kategorije.html', {'kategorija': kategorija, 'proizvodi': proizvodi})
+
+class AboutUsView(TemplateView):
+    template_name = 'o_nama.html'
 
 class SearchResultsView(View):
     def get(self, request, *args, **kwargs):
@@ -30,17 +37,6 @@ class SearchResultsView(View):
         results = Kategorija.objects.filter(naziv_kategorije__icontains=query)
         return render(request, 'search_results.html', {'results': results})
     
-class AboutUsView(TemplateView):
-    template_name = 'o_nama.html'
-
-
-
-def detalji_kategorije(request, id_kategorije):
-    kategorija = get_object_or_404(Kategorija, id_kategorije=id_kategorije)
-    proizvodi = kategorija.proizvodi.all()
-
-    return render(request, 'detalji_kategorije.html', {'kategorija': kategorija, 'proizvodi': proizvodi})
-
 def pretrazi_proizvode(request):
     query = request.GET.get('q', '')
     proizvodi = Proizvod.objects.filter(naziv_proizvoda__icontains=query)
@@ -100,9 +96,6 @@ def register(request):
 class mojiproizvodi(ListView):
     model=Proizvod
     template_name = 'mojiproizvodi.html'
-class NarudzbaPopis(ListView):
-    model=Narudzba
-    template_name = 'mojanarudzba.html'
 
 class ProizvodeUpdate(UpdateView):
     model = Proizvod
@@ -120,6 +113,9 @@ class ProizvodeDelete(DeleteView):
         context['main'] = self.get_object()
         return context
     
+class NarudzbaPopis(ListView):
+    model=Narudzba
+    template_name = 'mojanarudzba.html'    
 
 class InfoPlacanje(ListView):
     model = Placanje
@@ -134,12 +130,12 @@ def add_proiz(request):
     submitted = False
     if request.method == 'POST':
         if request.user.is_superuser:
-            form = ProizvodFormAdmin(request.POST, request.FILES)
+            form = ProizvodFormAdmin(request.POST)
             if form.is_valid():
                 form.save()  
                 return 	redirect('main:mojiproizvodi')
         else:          
-            form = ProizvodForm(request.POST,request.FILES)
+            form = ProizvodForm(request.POST)
             if form.is_valid():
                 venue = form.save(commit=False)
                 venue.proizvod_korisnik = request.user.korisnik
@@ -151,7 +147,7 @@ def add_proiz(request):
         if request.user.is_superuser:
             form = ProizvodFormAdmin
         else:
-            form = ProizvodForm()  # This line creates a new instance of the form after saving
+            form = ProizvodForm() 
 
         if 'submitted' in request.GET:
             submitted = True
